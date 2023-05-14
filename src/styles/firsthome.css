@@ -1,0 +1,41 @@
+.allHome{
+    height: 100vh;
+    font-family: Century Gothic;
+    background: linear-gradient(to bottom right, #DACDFF , #A47EFF);
+    color: white;
+    font-size: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.home{
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.leftS{
+    width: 70%
+}
+
+.title{
+    font-size: 105px;
+    display: flex;
+}
+
+.pred{
+    color: #7D4EF1;
+}
+.startButton{
+    color:#7D4EF1;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 50px;
+    border: solid 2px;
+    border-radius: 8px; 
+    align-items: center;
+    margin-top: 50px;
+}

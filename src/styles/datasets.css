@@ -1,0 +1,138 @@
+.datasetsTitleJust{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center ;
+    height: 7vh;
+
+}
+.datasetsTitle{
+    width: 95%;
+    font-size: 38px;
+    line-height: 45px;
+
+}
+.datasetsContainer{
+    width: 100%;
+    height: 85vh;
+    display: flex;
+    justify-content: center;
+}
+.datasetsTable{
+    width: 95%;
+    height: 100%;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 8px 8px 0px 0px;
+
+
+}
+.datasetsHeaderJust{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.datasetsHeader{
+    width: 95%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+.datasetButtons{
+    display: flex;
+    justify-content: space-evenly;
+    width: 30%;
+    height: 50px;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.searchData{
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.openButton{
+    background: rgba(125, 78, 241, 0.3);
+    width: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90%;
+    border-radius: 8px;
+}
+.dataEditButton{
+    background: #F6C4134D;
+    width: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90%;
+    border-radius: 8px;
+}
+.deleteButton{
+    background: #FF00004D;
+    width: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90%;
+    border-radius: 8px;
+}
+#searchInput{
+    border-radius: 5px;
+    width: 100%;
+    height: 51px;
+    background-color: #F0EFFF;
+    color: #9CB1F2;
+    border: solid 1px #ECECEC;
+}
+#searchIcon{
+  
+}
+.searchIconContainer{
+    margin-top: 20px;
+    
+    width: 10%;
+    display: flex;  
+    justify-content: center;
+}
+.rowTitles{
+    width: 100%;
+    margin-top: 20px    ;
+    display: flex;
+    justify-content: space-between;
+    background-color: #F4F2FF;
+    height: 45px;
+    background: #F4F2FF;
+border-top: 1px solid #D9D5EC;
+
+}
+.idTitle{
+    width: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.fileNameTitle{
+width: 20%;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+.dateCreationTitle{
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.modelTitle{
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

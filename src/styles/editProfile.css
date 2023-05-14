@@ -1,0 +1,90 @@
+.namesContentEdit{
+    display: flex;
+    justify-content: flex-start;
+    border-bottom: solid 2px black;
+    height: 15%;
+
+}
+.namesInputEdit{
+    width: 100%;
+    display: flex;
+}
+#nameEdit{
+    width: 90%;
+    background-color: white;
+}
+#lastEdit{
+    width: 90%;
+    background-color: white;
+
+}
+.namesEdit{
+width: 100%;
+display: flex;
+}
+#emailEdit{
+    width: 90%;
+    background-color: white;
+}
+.profileNameEdit{
+    width: 50%;
+    display: flex;
+}
+.profileLastEdit{
+   width: 50%;
+    display: flex; 
+}
+.profileTitleEdit{
+    margin-top: 20px;
+    height: 130px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size:  38px;
+    font-weight: 600;
+}
+.editprofileButtons{
+    display: flex;
+    justify-content: space-between;
+    height: 6%;
+}
+.cancelEdit{
+    width: 45%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: solid 2px #7D4EF1;
+    border-radius: 8px;
+    color: black;
+}
+.cancelEdit a{
+color: #7D4EF1;
+}
+.saveButtonEdit{
+
+width: 45%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: solid 2px #7D4EF1;
+    background-color: #7D4EF1;
+    border-radius: 8px;
+    color: white;
+}
+#currentPassword{
+    background-color: white;
+}
+
+#rePassword{
+    background-color: white;
+}
+
+#newPassword{
+    background-color: white;
+}
+.passwordProfile{
+    margin-bottom: 20px;
+}
+.emailEdit{
+    margin-top: 20px; ;
+}

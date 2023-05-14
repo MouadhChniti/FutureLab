@@ -1,0 +1,54 @@
+.rightForget{
+    height: 273px;
+    width: 458px;
+    background-color: white;
+    border: solid 2px;
+    border-radius: 15px;
+}
+
+.forgetTitle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.descForget{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    font-size: 20px;
+    color: #7D4EF1;
+}
+.inputForge{
+    width: 418px;
+}
+.forgetButtons{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+.cancelButtonF{
+    width: 48%;
+    border: solid 2px #7D4EF1;
+    border-radius: 8px;
+    height: 47px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.cancelButtonF a{
+    color: #7D4EF1;
+}
+.SendButtonF{
+    width: 48%;
+    border: solid 2px #7D4EF1;
+    background-color:#7D4EF1 ;
+    border-radius: 8px;
+    height: 47px;
+    display: flex;
+    justify-content: center;
+    align-items: center ;
+    color: white;
+}

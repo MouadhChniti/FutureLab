@@ -1,0 +1,133 @@
+.allHomee{
+    height: 93vh;
+    width: 100%;
+    font-family: Century Gothic;
+    margin: 0px;
+    padding: 0px;
+    background-color: white;
+    background-size: 400% 400%;
+    animation: gradient 18s ease infinite;
+    display: block;
+    align-items: center;
+    justify-content: space-between;
+}
+.allHomeJust{
+    display: flex;
+    width: 100%;
+}
+.homee{
+    width: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.homeeJust{
+display: flex;
+justify-content: center;
+width: 100%;
+height: 87vh;
+}
+.imgContainer{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.justifier{
+    display: flex;
+    justify-content: center;
+}
+
+.financial{
+    
+    width: 30%;
+    display: block;
+    justify-content: center;
+    background: #FFFFFF;
+box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+border-radius: 26px;
+
+/* Inside auto layout */
+
+flex: none;
+order: 0;
+flex-grow: 0;
+}
+/* .financial:hover{
+border-bottom: solid white;
+border-radius: 25px;
+} */
+
+.social{
+    
+    border-radius: 25px;
+    width: 30%;
+    display: block;
+    justify-content: center;
+    height: auto;
+    background: #FFFFFF;
+opacity: 0.2;
+box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+border-radius: 26px;
+
+/* Inside auto layout */
+
+flex: none;
+order: 1;
+flex-grow: 0;
+}
+/* .social:hover{
+    border-bottom: solid white;
+    border-radius: 25px;
+    } */
+.timeSeries{
+    
+    border-radius: 25px;
+    width: 30%;
+    display: block;
+    justify-content: center;
+    height: auto;
+    background: #FFFFFF;
+opacity: 0.2;
+box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+border-radius: 26px;
+
+/* Inside auto layout */
+
+flex: none;
+order: 1;
+flex-grow: 0;
+    
+}
+/* .timeSeries:hover{
+    border-bottom: solid white;
+    border-radius: 25px;
+    } */
+.button{
+    display: flex;
+    justify-content: center;
+    color: #7D4EF1;
+    margin-top: 20px;
+    font-size: 30px;
+}
+
+#sociallogo{
+    height: 50%;
+    width: 50%;
+}
+#financiallogo{
+    height: 50%;
+    width: 50%;
+}
+#timeSerieslogo{
+    height: 50%;
+    width: 50%;
+}
+
+a{
+    text-decoration: none;
+}
+.homeJustifier{
+display: flex;
+
+}

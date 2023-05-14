@@ -1,0 +1,32 @@
+.allMenu{
+    width: 90px;
+    height: 100vh;
+    z-index: 101;
+}
+.menu{
+    width: 100%;
+    height: 100%;
+    background-color: #F8F8F8;
+    display: flex;
+    justify-content: center;
+}
+
+.navIcons{
+    display: block;
+    height: 85%;
+}
+
+.homeiconjust{
+    margin-bottom: 30px;
+}
+.dataseticonjust{
+display: flex;
+justify-content: center;
+align-items: center;
+}
+#platformlogoicon{
+    height: 70px;
+}
+.menuJust{
+height: 95%;
+}
