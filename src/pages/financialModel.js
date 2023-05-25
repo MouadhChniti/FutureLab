@@ -34,6 +34,7 @@ import Menu from '../components/menu'
 import Dashboard from './dashboard';
 import { Navigate } from 'react-router-dom/dist';
 
+
 const fakeResponse = {
     data: [
         { id: 1, name: 'Item 1', date: '11/11/2022' },
@@ -43,39 +44,61 @@ const fakeResponse = {
 };
 
 
-const apiClient = {
-    get: () => {
-        return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                resolve(fakeResponse);
-            }, 1000);
-        });
-    },
-};
+
 export const DataContext = createContext([]);
 
 const Fm = () => {
+    const navigate = useNavigate();
+    
+
+
 
     const [data, setData] = useState([]);
 
-
-
-
-
-
-
-
     const [error, setError] = useState(null);
-    const sendData = async () => {
+    const [file, setFile] = useState(null);
+    const [response, setResponse] = useState(null);
+
+    const handleFileChange = (event) => {
+        setFile(event.target.files[0]);
+    };
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+        const formData = new FormData();
+        formData.append('file', file);
+
+        try {
+            const response = await axios.post('http://localhost:8000/api/financial_model/', formData);
+            setResponse(response.data);
+            //console.log(response.data);
+
+            navigate('/dashboard', { state: response.data });
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
+
+    {/*const sendData = async (event) => {
+        event.preventDefault();
         console.log(params);
         try {
-            const response = await axios.post("http://localhost:8000/api/train/", params);
+            console.log('api process started')
+            const response = await axios.post('http://localhost:8000/api/financial_model/',params.file );
             console.log(response.data);
+
+            navigate('/dashboard', { state :  response.data });
+            
         } catch (error) {
+            
             console.error(error);
             setError(error.response.data.msg);
         }
+        
     };
+    
+*/}
 
 
 
@@ -96,14 +119,8 @@ const Fm = () => {
     const [isChecked, setIsChecked] = useState(false);
 
     const [params, setParams] = useState({
-        dataset: "",
-        paramsChoice: "",
+        file: "",
         fillMissValues: "",
-        epochs: "",
-        units: "",
-        batchSize: "",
-        optimizer: "",
-        finetune: "",
     });
 
 
@@ -173,7 +190,7 @@ const Fm = () => {
     }
 
 
-    const navigate = useNavigate();
+
 
 
     const handleFormSubmit = (event) => {
@@ -183,14 +200,15 @@ const Fm = () => {
 
         const fakeResponse = {
             data: [
-                { id: 1, name: 'Item 1', date: '11/01/2023', tomorrowPredict:'230.25567',predictDuration:'1.23',
-                trainDuration:'12.25567', fineTuneDuration:'22.25567', 
-             }
+                {
+                    id: 1, name: 'Item 1', date: '11/01/2023', tomorrowPredict: '230.25567', predictDuration: '1.23',
+                    trainDuration: '12.25567', fineTuneDuration: '22.25567',
+                }
             ],
         };
-        
-        
-        navigate('/dashboard', { state : {data: fakeResponse.data} });
+
+
+        navigate('/dashboard', { state: { data: fakeResponse.data } });
 
 
 
@@ -202,6 +220,10 @@ const Fm = () => {
             optimizer: value
         }));
     }
+    // const handleFileChange = (event) => {
+    //     const file = event.target.files[0];
+    //     setParams({ ...params, file });
+    //   };
 
     return (
         <div className='fmJustifier'>
@@ -227,7 +249,7 @@ const Fm = () => {
                         <img src={formFmImg} id='formFmImg'></img>
 
                     </div>
-                    <form className='formFm' onSubmit={handleFormSubmit}>
+                    <form className='formFm' onSubmit={handleSubmit} >
                         <div className='financialjust'>
                             <div className='titleFm'>Financial Model training</div>
                             <div className='datasetFm'>
@@ -239,14 +261,11 @@ const Fm = () => {
                                     id="fileUpload"
                                     type="file"
                                     style={{ display: "none" }}
-                                    onChange={(event) => {
-                                        const file = event.target.files[0];
-                                        handleFileLoaded(file);
-                                    }}
+                                    onChange={handleFileChange}
                                 />
                             </div>
 
-                            <div className='paramsFm'>
+                            {/* <div className='paramsFm'>
                                 <div>Parameters choice:</div>
 
                                 <Radio
@@ -267,7 +286,7 @@ const Fm = () => {
                                     inputProps={{ 'aria-label': 'B' }}
                                 />
                                 <label>Default</label>
-                            </div>
+                            </div> */}
 
                             <div className='missingFm'>
                                 <div>
@@ -275,12 +294,12 @@ const Fm = () => {
                                 </div>
 
                                 <Radio
-                                    checked={selectedValueb === 'delete'}
+                                    checked={selectedValueb === 'drop'}
                                     onChange={handleChangeclean}
-                                    value="delete"
+                                    value="drop"
                                     name="fillMissValues"
                                     inputProps={{ 'aria-label': 'C' }}
-                                    disabled={selectedValue == 'default'}
+                                //disabled={selectedValue == 'default'}
                                 />
                                 <label>Delete</label>
 
@@ -291,7 +310,7 @@ const Fm = () => {
                                     value="avg"
                                     name="fillMissValues"
                                     inputProps={{ 'aria-label': 'D' }}
-                                    disabled={selectedValue == 'default'}
+                                //disabled={selectedValue == 'default'}
 
                                 />
                                 <label>average</label>
@@ -303,7 +322,7 @@ const Fm = () => {
 
 
 
-                            <div className='inputsFm'><input type='text' placeholder='epochs' name='epochs' id='fmInput'
+                            {/* <div className='inputsFm'><input type='text' placeholder='epochs' name='epochs' id='fmInput'
                                 value={params.epochs}
                                 disabled={selectedValue == 'default'} onChange={(e) => setParams({ ...params, epochs: e.target.value })}></input></div>
 
@@ -313,7 +332,7 @@ const Fm = () => {
                             <div className='inputsFm'><input type='text' placeholder='batch size' name='batchSize' id='fmInput'
                                 value={params.batchSize}
                                 disabled={selectedValue == 'default'} onChange={(e) => setParams({ ...params, batchSize: e.target.value })}></input></div>
-
+ */}
 
 
                             {/* <Box sx={{ minWidth: 120 }}>
@@ -333,18 +352,18 @@ const Fm = () => {
                             </FormControl>
                         </Box> */}
 
-                            <div className='boxcss'>
+                            {/* <div className='boxcss'>
 
                                 <CheckBox
                                     label="Finetune your model (better results - longer process)"
                                     isChecked={isChecked}
                                     onChange={handleCheckChange}
                                 />
-                            </div>
+                            </div> */}
 
                             <div className='trainhome'>
 
-                                <button onSubmit={handleFormSubmit} >Train your Model</button>
+                                <button onSubmit={handleSubmit} >Train your Model</button>
 
                             </div>
                         </div>

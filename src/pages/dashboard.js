@@ -23,22 +23,20 @@ const Dashboard = (props) => {
 
 
 
-  const { state } = useLocation();
-  const { data } = state;
-  console.log(data)
-
-
-
-
+  const location = useLocation();
+  const data = location.state;
+  const predictedData = data.y_predinv.map(([value]) => value);
 
   const canvasRef = useRef(null);
 
   useEffect(() => {
+    console.log('inside use effect', data)
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
 
-    const actualData = [65, 59, 80, 81, 56, 55, 40];
-    const predictedData = [50, 70, 65, 82, 60, 50, 30];
+    const actualData = data.y_test.map(([value]) => value);;
+    const predictedData = data.y_predinv.map(([value]) => value);
+
 
     const chart = new Chart(ctx, {
       type: 'line',
@@ -105,7 +103,7 @@ const Dashboard = (props) => {
     return () => {
       chart.destroy();
     };
-  }, []);
+  }, [data]);
 
 
   return (
@@ -139,9 +137,9 @@ const Dashboard = (props) => {
                 <div className='tomorrowPredictBox'>
                   <div className='tomorrowPredTitle'>Tomorrow's prediction</div>
                   <div className='tomorrowVal'>
-                    {data && data.map((item) => (
-                      <div key={item.id}> {item.tomorrowPredict}</div>
-                    ))}
+
+                    <div > {predictedData[predictedData.length - 1]}</div>
+
                   </div>
                 </div>
 
@@ -150,30 +148,30 @@ const Dashboard = (props) => {
               <div className='statsTableJust'>
                 <div className='statsTable'>
                   <div className='statsTitle'>Execution stats</div>
-                  {data && data.map((item) => (
-                    <div key={item.id} className='statDiv'> <div> Train Duration :</div> <div>{item.trainDuration} s </div></div>
 
-                  ))}
-                  {data && data.map((item) => (
+                  <div className='statDiv'> <div> Train Duration :</div> <div> {data.execution_time} s </div></div>
 
-                    <div key={item.id} className='statDiv'><div>Prediction Duration :</div> <div>{item.predictDuration} s</div></div>
-                  ))}
-                  {data && data.map((item) => (
 
-                    <div key={item.id} className='statDiv'><div>Finetune Duration : </div>{item.fineTuneDuration} m</div>
-                  ))}
-                  {data && data.map((item) => (
 
-                    <div key={item.id} className='statDiv'><div>Finetune Duration : </div>{item.fineTuneDuration} m</div>
-                  ))}
-                  {data && data.map((item) => (
 
-                    <div key={item.id} className='statDiv'><div>Finetune Duration : </div>{item.fineTuneDuration} m</div>
-                  ))}
-                  {data && data.map((item) => (
+                  <div className='statDiv'><div>Prediction Duration :</div> <div> s</div></div>
 
-                    <div key={item.id} className='statDiv'><div>Finetune Duration : </div>{item.fineTuneDuration} m</div>
-                  ))}
+
+
+                  <div className='statDiv'><div>Finetune Duration : </div> m</div>
+
+
+
+                  <div className='statDiv'><div>Finetune Duration : </div> m</div>
+
+
+
+                  <div className='statDiv'><div>Finetune Duration : </div>m</div>
+
+
+
+                  <div className='statDiv'><div>Finetune Duration : </div> m</div>
+
 
                 </div>
               </div>

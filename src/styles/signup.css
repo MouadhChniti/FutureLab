@@ -32,3 +32,13 @@ margin-top: -80px;
 .noAcc{
     color: black;
 }
+
+.passwordInput{
+    width: 100%;
+    border-radius: 8px;
+    background-color: #F0EFFF;
+    height: 51px;
+    margin-top: 20px;
+    color: #9CB1F2;
+    border: solid 1px #ECECEC;
+}

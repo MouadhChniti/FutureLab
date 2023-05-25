@@ -9,6 +9,7 @@ import financialLogo from '../images/financialLogo.png'
 import timeSeriesLogo from '../images/timeSeriesLogo.png'
 import homeimg from '../images/homeimg.png'
 import "aos/dist/aos.css";
+import socketIoClient from '../socketIoClient'
 
 
 
@@ -16,7 +17,12 @@ const Fhome = (props) => {
 
 
 
-
+   
+        /*useEffect(() => {
+          const socketClient = socketIoClient();
+          socketClient.connect();
+         
+        }, []);*/
 
     return (
         <div className='allHome'>

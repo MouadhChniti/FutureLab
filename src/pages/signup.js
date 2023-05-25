@@ -12,10 +12,42 @@ import apple from '../images/apple.png'
 import google from '../images/google.png'
 import facebook from '../images/Facebook.png'
 import "aos/dist/aos.css";
+import { Navigate } from 'react-router-dom/dist';
 
 
 
 const Signup = (props) => {
+    const [email, setEmail] = useState('');
+    const [first_name, setFirstName] = useState('');
+    const [last_name, setLastName] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [error, setError] = useState(null);
+
+    const handleSignup = async () => {
+        // Create an object with the form data
+        const formData = {
+            email,
+            first_name,
+            last_name,
+            password,
+            confirmPassword,
+        };
+        //console.log(formData);
+        try {
+            console.log('api process started')
+
+            const response = await axios.post('http://localhost:8000/api/accounts/signup/', formData);
+            console.log(response.data);
+
+            //Navigate('/login');
+
+        } catch (error) {
+
+            console.error(error);
+            setError(error.response.data.msg);
+        }
+    };
 
 
 
@@ -35,33 +67,45 @@ const Signup = (props) => {
                 <div className='rightSignup'>
                     <div className='formSighup'>
                         <div className='rightJust'>
-                            <div className='sighupTitle'>Sign up</div>
-                            <div>
-                                <input type='text' placeholder='Enter your E-mail'></input>
-                            </div>
+                            <form className='formSignUp' onSubmit={handleSignup} >
+                                <div className='sighupTitle'>Sign up</div>
+                                <div>
+                                    <input type='text' placeholder='Enter your E-mail'
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}></input>
+                                </div>
 
-                            <div className='inputNames'>
-                                <input type='text' placeholder='First name' id='name'></input>
-                                <input type='text' placeholder='Last name' id='name'></input> 
-                            </div>
+                                <div className='inputNames'>
+                                    <input type='text' placeholder='First name' id='name'
+                                        value={first_name}
+                                        onChange={(e) => setFirstName(e.target.value)}></input>
+                                    <input type='text' placeholder='Last name' id='name'
+                                        value={last_name}
+                                        onChange={(e) => setLastName(e.target.value)}></input>
+                                </div>
 
-                            <div className='inputsLog'>
-                                <div className='inpJust'><input type='text' placeholder='Password'></input></div>
+                                <div className='inputsLog'>
+                                    <div className='inpJust'><input className='passwordInput'type='password' placeholder='Password'
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}></input></div>
 
-                                <div className='inpJust'><input type='text' placeholder='Confirm Password'></input></div>
-                            </div>
+                                    <div className='inpJust'><input className='passwordInput' type='password' placeholder='Confirm Password'
+                                        value={confirmPassword}
+                                        onChange={(e) => setConfirmPassword(e.target.value)}></input></div>
+                                </div>
 
-                            <div className='logButton'>Login</div>
+                                <button className='logButton' onSubmit={handleSignup}>Sign up</button>
 
-                            <div className='cont'>or continue with</div>
-                            <div className='logosSign'>
-                                <img src={facebook} id="facebook" />
-                                <img src={apple} id="apple" />
-                                <img src={google} id="google" />
-                            </div>
+                                <div className='cont'>or continue with</div>
+                                <div className='logosSign'>
+                                    <img src={facebook} id="facebook" />
+                                    <img src={apple} id="apple" />
+                                    <img src={google} id="google" />
+                                </div>
 
-                            <div className='noAcc'>You don't have an account?</div>
-                            <Link to='/login'><div className='regHere'>Login here!</div></Link>
+                                <div className='noAcc'>You don't have an account?</div>
+                                <Link to='/login'><div className='regHere'>Login here!</div></Link>
+                            </form>
                         </div>
                     </div>
 
