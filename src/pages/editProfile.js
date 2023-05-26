@@ -81,19 +81,27 @@ const Editprofile = (props) => {
                             </div>
                         </div>
 
-                        <div className='passwordProfile'>Rewrite new Password
+                        <div className='passwordProfile'>Confirm password
                             <div>
                                 <div><input type='text' id='rePassword'></input></div>
                             </div>
                         </div>
                         <div className='editprofileButtons'>
-                            <div className='cancelEdit'>
-                               <Link to='/profile'> cancel</Link>
-                            </div>
 
-                            <div className='saveButtonEdit'>
-                                Save
-                            </div>
+                               <Link to='/profile' className='cancelEdit'>
+                                    <div className='cancelEditBtn'>
+                                        Cancel
+                                    </div>
+                                </Link>
+
+
+
+                                <Link to='/profile' className='saveButtonEdit'>
+                                    <div className='saveButtonEditBtn'>
+                                        Save
+                                    </div> 
+                                </Link>
+
                         </div>
 
                     </div>

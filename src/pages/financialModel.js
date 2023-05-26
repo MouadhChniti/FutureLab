@@ -313,7 +313,7 @@ const Fm = () => {
                                 //disabled={selectedValue == 'default'}
 
                                 />
-                                <label>average</label>
+                                <label>Average</label>
                             </div>
 
 

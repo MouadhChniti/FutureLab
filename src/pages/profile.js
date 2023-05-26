@@ -42,13 +42,13 @@ const Profile = (props) => {
                 <Navbar />
                 <div className='profileJust'>
                     <div className='profileForm'>
-                        <div >
+                        <div>
                             <div className='profileTitle'>Profile</div>
 
                         </div>
                         <div className='names'>
                             <div className='profileName'>
-                                <div> First name</div>
+                                <div>First name</div>
 
                             </div>
                             <div className='profileLast'>
@@ -70,9 +70,9 @@ const Profile = (props) => {
                             </div>
                         </div>
 
-                        <div className='editButton'>
-                           <Link to='/editprofile'> Edit </Link>
-                        </div>
+                        <Link to='/editprofile' className='editButton'>
+                            Edit Profile
+                        </Link>
 
                     </div>
 
