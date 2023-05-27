@@ -64,6 +64,7 @@
     align-items: center;
     height: 90%;
     border-radius: 8px;
+    cursor: pointer;
 }
 .dataEditButton{
     background: #F6C4134D;
@@ -73,6 +74,7 @@
     align-items: center;
     height: 90%;
     border-radius: 8px;
+    cursor: pointer;
 }
 .deleteButton{
     background: #FF00004D;
@@ -82,6 +84,7 @@
     align-items: center;
     height: 90%;
     border-radius: 8px;
+    cursor: pointer;
 }
 #searchInput{
     border-radius: 5px;
