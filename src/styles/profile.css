@@ -2,10 +2,10 @@
 font-size: 38px;
 }
 .profileName{
-    width: 40%;
+    width: 50%;
 }
 .profileLast{
-    width: 40%;
+    width: 50%;
 }
 .profileJust{
     display: flex;
@@ -28,13 +28,22 @@ font-size: 38px;
 }
 .namesContent{
     height: 50px;
+    width: 100%;
     border-bottom: solid 2px black ;
     margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #7D4EF1;
+    
 }
 .emailContent{
     height: 50px;
     border-bottom: solid 2px black ;
     margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    color: #7D4EF1;
 }
 .editButton{
     width: 100%;
@@ -49,4 +58,11 @@ font-size: 38px;
 }
 .passwordProfile{
     height: 100px;
+}
+.namesContentfirstlast{
+    width: 50%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    color: #7D4EF1;
 }

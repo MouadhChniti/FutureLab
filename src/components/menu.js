@@ -11,6 +11,7 @@ import platformlogoicon from '../images/platformlogo.png'
 import Home from '../pages/home'
 import Fhome from '../pages/firsthome'
 import "aos/dist/aos.css";
+import DropdownMenu from './dropmenu';
 
 
 
@@ -35,7 +36,8 @@ const Menu = (props) => {
                         </div>
 
                         <div className='settingsIcon'>
-                            <img src={settingsicon} id='settingsicon '></img>
+                            {/* <img src={settingsicon} id='settingsicon '></img> */}
+                            <DropdownMenu/>
                         </div>
                     </div>
                 </div>

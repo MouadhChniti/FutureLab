@@ -25,17 +25,22 @@ const Dashboard = (props) => {
 
   const location = useLocation();
   const data = location.state;
-  const predictedData = data.y_predinv.map(([value]) => value);
+  console.log('dataaa:',data)
 
+
+  const predictedData = data.y_pred.map(([value]) => value);
+  const actualData = data.y_test.map(([value]) => value);
+ 
   const canvasRef = useRef(null);
 
   useEffect(() => {
+    
     console.log('inside use effect', data)
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
 
-    const actualData = data.y_test.map(([value]) => value);;
-    const predictedData = data.y_predinv.map(([value]) => value);
+    const actualData = data.y_test.map(([value]) => value);
+    const predictedData = data.y_pred.map(([value]) => value);
 
 
     const chart = new Chart(ctx, {
@@ -138,7 +143,7 @@ const Dashboard = (props) => {
                   <div className='tomorrowPredTitle'>Tomorrow's prediction</div>
                   <div className='tomorrowVal'>
 
-                    <div > {predictedData[predictedData.length - 1]}</div>
+                    <div > {data.last_prediction}</div>
 
                   </div>
                 </div>
