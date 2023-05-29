@@ -65,21 +65,27 @@ const Fm = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
+      
         const formData = new FormData();
         formData.append('file', file);
-
+      
         try {
-            const response = await axios.post('http://localhost:8000/api/financial_model/', formData);
-            setResponse(response.data);
-            //console.log(response.data);
-
-            navigate('/dashboard', { state: response.data });
+          const token = localStorage.getItem('token');
+      
+          const response = await axios.post('http://localhost:8000/api/financial_model/', formData, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          setResponse(response.data);
+          //console.log(response.data);
+      
+          navigate('/dashboard', { state: response.data });
         } catch (error) {
-            console.error('Error:', error);
+          console.error('Error:', error);
         }
-    };
-
+      };
+      
     {/*const sendData = async (event) => {
         event.preventDefault();
         console.log(params);
