@@ -1,6 +1,6 @@
 import Fm from './pages/financialModel';
 import { useState, useEffect } from "react"
-import { BrowserRouter, Routes, Route,Router } from "react-router-dom"
+import { BrowserRouter, Routes, Route, Router } from "react-router-dom"
 import Home from './pages/home';
 import Fhome from './pages/firsthome';
 import Login from './pages/login'
@@ -12,6 +12,9 @@ import Dashboard from './pages/dashboard'
 import Datasets from './pages/datasets';
 import Provider from './components/privateroute';
 import axios from 'axios';
+import SocialModel from './pages/socialModel';
+import DashboardSocial from './pages/dashboardSocial';
+import Admin from './pages/admin';
 //import socketIoClient from './socketIoClient';
 
 
@@ -20,31 +23,13 @@ import axios from 'axios';
 
 
 const App = () => {
-  /*socketIoClient();
- return <div>
-   hello !
- </div>*/
- 
-  
-    /*axios.post("http://localhost:8000/api/accounts/login/", {email: "omar@gmail.com",password: "password"}).then(result => {
-      console.log(result.data.token)
-      localStorage.setItem("token", result.data.token)
-      //navigate("/home")
-    }).catch(err => {
-      console.log('error')
-    })
-  
-  return (
-    <div>
-      <div>hello!</div>
 
-    </div>
-  )*/
   return (
 
     <BrowserRouter>
       <Routes>
         <Route path="/fm" element={<Fm />} />
+        <Route path="/socialmodel" element={<SocialModel />} />
         {/* <Route element={<Provider />}>
           <Route path="/home" element={<Home />} />
         </Route>  */}
@@ -56,7 +41,9 @@ const App = () => {
         <Route path="/Profile" element={<Profile />} />
         <Route path="/editprofile" element={<Editprofile />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboardSocial" element={<DashboardSocial />} />
         <Route path="/datasets" element={<Datasets />} />
+        <Route path="/django-admin" element={<Admin />}/>
 
         {/* <Route element={<Provider />}>
           <Route path="/home" element={<Home />} />

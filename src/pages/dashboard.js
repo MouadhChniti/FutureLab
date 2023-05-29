@@ -14,6 +14,8 @@ import { useContext } from 'react';
 import { DataContext } from '../pages/financialModel';
 import { Line } from 'react-chartjs-2';
 import Chart from 'chart.js/auto';
+import LoadingScreen from '../components/loading';
+
 
 import "aos/dist/aos.css";
 
@@ -22,7 +24,7 @@ import "aos/dist/aos.css";
 const Dashboard = (props) => {
 
 
-
+  const [isLoading, setIsLoading] = useState(true);
   const location = useLocation();
   const data = location.state;
   console.log('dataaa:',data)
@@ -118,7 +120,7 @@ const Dashboard = (props) => {
         <div className='allHomee'>
           <Navbar />
           <div className='dashboardTitleJust'>
-            <div className='dashboardTitle'>Dashboard</div>
+            <div className='dashboardTitle'>Financial Model Dashboard</div>
           </div>
 
           <div className='dashboradPage'>

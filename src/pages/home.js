@@ -51,12 +51,13 @@ const Home = (props) => {
 
                             <div className='social'>
                                 {/* <div>social media emotion detection</div> */}
-                                <div className='imgContainer'>
-                                    <img src={socialLogo} id="sociallogo" /></div>
-                                <div className='button'>
-                                    <div>Social recognition Model</div>
-                                </div>
-
+                                <Link to={'/socialmodel'}>
+                                    <div className='imgContainer'>
+                                        <img src={socialLogo} id="sociallogo" /></div>
+                                    <div className='button'>
+                                        <div>Social recognition Model</div>
+                                    </div>
+                                </Link>
 
                             </div>
 
