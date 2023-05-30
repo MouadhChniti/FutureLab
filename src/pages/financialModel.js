@@ -63,28 +63,65 @@ const Fm = () => {
         setFile(event.target.files[0]);
     };
 
+
     const handleSubmit = async (event) => {
         event.preventDefault();
-      
+
+        const selectedValue = document.querySelector('input[name="fillMissValues"]:checked').value;
+        
         const formData = new FormData();
-        formData.append('file', file);
+        formData.append("file", file);
+        formData.append('fillMissValues', selectedValue);
       
         try {
-          const token = localStorage.getItem('token');
+          const token = localStorage.getItem("token");
       
-          const response = await axios.post('http://localhost:8000/api/financial_model/', formData, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
+          const response = await axios.post(
+            "http://localhost:8000/api/financial_model/",
+            formData,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
           setResponse(response.data);
           //console.log(response.data);
       
-          navigate('/dashboard', { state: response.data });
+          navigate("/dashboard", { state: response.data });
         } catch (error) {
-          console.error('Error:', error);
+          console.error("Error:", error);
         }
       };
+      
+
+
+
+
+
+
+    // const handleSubmit = async (event) => {
+    //     event.preventDefault();
+      
+    //     const formData = new FormData();
+    //     formData.append('file', file);
+      
+    //     try {
+    //       const token = localStorage.getItem('token');
+      
+    //       const response = await axios.post('http://localhost:8000/api/financial_model/', formData, {
+    //         headers: {
+    //           Authorization: `Bearer ${token}`,
+    //         },
+    //       });
+    //       setResponse(response.data);
+    //       //console.log(response.data);
+      
+    //       navigate('/dashboard', { state: response.data });
+    //     } catch (error) {
+    //       console.error('Error:', error);
+    //     }
+    //   };
       
     {/*const sendData = async (event) => {
         event.preventDefault();
