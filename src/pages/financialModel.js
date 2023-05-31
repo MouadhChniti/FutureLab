@@ -1,4 +1,3 @@
-
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { Route } from 'react-router-dom';
@@ -35,7 +34,13 @@ import Dashboard from './dashboard';
 import { Navigate } from 'react-router-dom/dist';
 
 
-
+const fakeResponse = {
+    data: [
+        { id: 1, name: 'Item 1', date: '11/11/2022' },
+        { id: 2, name: 'Item 2', date: '12/11/2022' },
+        { id: 3, name: 'Item 3', date: '13/11/2022' },
+    ],
+};
 
 
 
@@ -57,48 +62,85 @@ const Fm = () => {
         setFile(event.target.files[0]);
     };
 
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+        const selectedValue = document.querySelector('input[name="fillMissValues"]:checked').value;
+        
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append('fillMissValues', selectedValue);
+      
+        try {
+          const token = localStorage.getItem("token");
+      
+          const response = await axios.post(
+            "http://localhost:8000/api/financial_model/",
+            formData,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+          setResponse(response.data);
+          //console.log(response.data);
+      
+          navigate("/dashboard", { state: response.data });
+        } catch (error) {
+          console.error("Error:", error);
+        }
+      };
+      
+
+
+
+
+
+
     // const handleSubmit = async (event) => {
     //     event.preventDefault();
-
+      
     //     const formData = new FormData();
     //     formData.append('file', file);
-
+      
     //     try {
-    //         const response = await axios.post('http://localhost:8000/api/financial_model/', formData);
-    //         setResponse(response.data);
-    //         console.log(response.data);
-
-    //         navigate('/dashboard', { state: response.data });
+    //       const token = localStorage.getItem('token');
+      
+    //       const response = await axios.post('http://localhost:8000/api/financial_model/', formData, {
+    //         headers: {
+    //           Authorization: `Bearer ${token}`,
+    //         },
+    //       });
+    //       setResponse(response.data);
+    //       //console.log(response.data);
+      
+    //       navigate('/dashboard', { state: response.data });
     //     } catch (error) {
-    //         console.error('Error:', error);
+    //       console.error('Error:', error);
     //     }
-    // };
-// }
-const handleSubmit = async (event) => {
-    event.preventDefault();
-  
-    const formData = new FormData();
-    formData.append('file', file);
-    
+    //   };
+      
+    {/*const sendData = async (event) => {
+        event.preventDefault();
+        console.log(params);
+        try {
+            console.log('api process started')
+            const response = await axios.post('http://localhost:8000/api/financial_model/',params.file );
+            console.log(response.data);
 
-  
-    try {
-        console.log(formData.fillMissValues)
-      const token = localStorage.getItem('token');
-  
-      const response = await axios.post('http://localhost:8000/api/financial_model/', formData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setResponse(response.data);
-      //console.log(response.data);
-  
-      navigate('/dashboard', { state: response.data });
-    } catch (error) {
-      console.error('Error:', error);
-    }
-  };
+            navigate('/dashboard', { state :  response.data });
+            
+        } catch (error) {
+            
+            console.error(error);
+            setError(error.response.data.msg);
+        }
+        
+    };
+    
+*/}
 
 
 
