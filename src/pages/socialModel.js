@@ -65,7 +65,13 @@ const SocialModel = () => {
         formData.append('file', file);
 
         try {
-            const response = await axios.post('http://localhost:8000/api/social/social_model/', formData);
+            const token = localStorage.getItem("token");
+            const response = await axios.post('http://localhost:8000/api/social/social_model/', formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
             setResponse(response.data);
             //console.log(response.data);
 
