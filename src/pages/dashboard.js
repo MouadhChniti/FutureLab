@@ -143,9 +143,7 @@ const Dashboard = (props) => {
     formData.append('low', inputValues.low);
     formData.append('close', inputValues.close);
     formData.append('volume', inputValues.volume);
-    console.log('formData')
-    console.log(formData)
-    console.log('formData')
+    formData.append('data_id', data.data_id);
   
     try {
       const response = await axios.post(
@@ -160,7 +158,10 @@ const Dashboard = (props) => {
       );
       setResponse(response.data);
       //console.log(response.data);
-  
+      
+      // Store the data_id in local storage
+      localStorage.setItem("data_id", response.data.data_id);
+      
       navigate("/dashboard", { state: response.data });
     } catch (error) {
       console.error("Error:", error);
