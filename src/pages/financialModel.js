@@ -85,52 +85,7 @@ const Fm = () => {
       console.error("Error:", error);
     }
   };
-
-  // const handleSubmit = async (event) => {
-  //     event.preventDefault();
-
-  //     const formData = new FormData();
-  //     formData.append('file', file);
-
-  //     try {
-  //       const token = localStorage.getItem('token');
-
-  //       const response = await axios.post('http://localhost:8000/api/financial_model/', formData, {
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       });
-  //       setResponse(response.data);
-  //       //console.log(response.data);
-
-  //       navigate('/dashboard', { state: response.data });
-  //     } catch (error) {
-  //       console.error('Error:', error);
-  //     }
-  //   };
-
-  {
-    /*const sendData = async (event) => {
-        event.preventDefault();
-        console.log(params);
-        try {
-            console.log('api process started')
-            const response = await axios.post('http://localhost:8000/api/financial_model/',params.file );
-            console.log(response.data);
-
-            navigate('/dashboard', { state :  response.data });
-            
-        } catch (error) {
-            
-            console.error(error);
-            setError(error.response.data.msg);
-        }
-        
-    };
-    
-*/
-  }
-
+  
   function CheckBox({ label, isChecked, onChange }) {
     return (
       <label>

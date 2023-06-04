@@ -14,6 +14,7 @@ import { useContext } from 'react';
 import { DataContext } from '../pages/financialModel';
 import Search from '../images/Search.png'
 import TableRow from '../components/rowTable';
+import { useNavigate } from "react-router-dom/dist";
 
 
 import "aos/dist/aos.css";
@@ -21,77 +22,142 @@ import "aos/dist/aos.css";
 
 
 const Datasets = (props) => {
+  const navigate = useNavigate();
+
+  const [response, setResponse] = useState(null);
+
+  useEffect(() => {
+    const customEvent = {
+      preventDefault: () => {
+        // Your custom code here to handle the prevention of default behavior
+      },
+    };
+
+    const handleGetData = async (event) => {
+      try {
+        // customEvent.preventDefault();
+        const token = localStorage.getItem('token');
+
+        const response = await axios.post(
+          'http://localhost:8000/api/get_financial_data/', {},
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setResponse(response.data);
+        console.log(response.data.financial_data)
 
 
-    const data = [{ id: 1, fileName: 'name1', dateCreation: '12/05/2023', model: 'Financial Model' },
-    { id: 2, fileName: 'name2', dateCreation: '12/05/2023', model: 'Financial Model' },
-    { id: 3, fileName: 'name3', dateCreation: '12/05/2023', model: 'Financial Model' },
-    { id: 4, fileName: 'name4', dateCreation: '12/05/2023', model: 'Financial Model' },
-    { id: 5, fileName: 'name5', dateCreation: '12/05/2023', model: 'Financial Model' },
-    { id: 6, fileName: 'name6', dateCreation: '12/05/2023', model: 'Financial Model' },
-    { id: 7, fileName: 'name7', dateCreation: '12/05/2023', model: 'Financial Model' },
-    { id: 8, fileName: 'name8', dateCreation: '12/05/2023', model: 'Financial Model' },
-    { id: 9, fileName: 'name9', dateCreation: '12/05/2023', model: 'Financial Model' },
-    { id: 10, fileName: 'name10', dateCreation: '12/05/2023', model: 'Financial Model' },
-    ];
+        // Store the data_id in local storage
 
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
 
-
-
-
-
-    return (
-        <div className='homeJustifier'>
-            <Menu />
-            <div className='allHomeJust'>
-                <div className='allHomee'>
-                    <Navbar />
-                    <div className='datasetsTitleJust'>
-                        <div className='datasetsTitle'>
-                            Files
-                        </div>
-                    </div>
-                    <div className='datasetsContainer'>
-                        <div className='datasetsTable'>
-                            <div className='datasetsHeaderJust'>
-                                <div className='datasetsHeader'>
-                                    <div className='searchData'>
-                                        <div className='searchIconContainer'><img src={Search} id='searchIcon'></img></div>
-                                        <input type='text' placeholder='Search Users by Name, Email or Date' id='searchInput' name='searchInput'></input> </div>
-                                    <div className='datasetButtons'>
-                                        <div className='openButton'>Open</div>
-                                        <div className='dataEditButton'>Edit</div>
-                                        <div className='deleteButton'>Delete</div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className='rowTitles'>
-                                <div className='idTitle'>ID</div>
-                                <div className='fileNameTitle'>Files Name</div>
-                                <div className='dateCreationTitle'>Date of creation</div>
-                                <div className='modelTitle'>Model</div>
-                            </div>
-
-                            {data.map(item => (
-                                <TableRow key={item.id} data={item} />
-                            ))}
-
-
-                        </div>
-
-
-                    </div>
+    handleGetData();
+  }, []);
 
 
 
+  const handleClick = () => {
+    const cleaned_data_id = localStorage.getItem("data_id");
+    const model_name = localStorage.getItem("model_name");
+  if (model_name=="financial model") {
+    axios.get('http://localhost:8000/api/get_financial_data_byid/', {
+      params: {
+        cleaned_data_id: cleaned_data_id,
+      },
+    })
+      .then(response => {
+        console.log(response.data);
+        
+        navigate("/dashboard", { state: response.data });
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+    }
+
+    if (model_name == "social model") {
+      axios.get('http://localhost:8000/api/social/get_social_data_byid/', {
+        params: {
+          cleaned_data_id: cleaned_data_id,
+        },
+      })
+        .then(response => {
+          console.log(response.data);
+          navigate("/dashboardSocial", { state: response.data });
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+    }
+  }
+
+
+
+
+
+
+
+  return (
+    <div className='homeJustifier'>
+      <Menu />
+      <div className='allHomeJust'>
+        <div className='allHomee'>
+          <Navbar />
+          <div className='datasetsTitleJust'>
+            <div className='datasetsTitle'>
+              Files
+            </div>
+          </div>
+          <div className='datasetsContainer'>
+            <div className='datasetsTable'>
+              <div className='datasetsHeaderJust'>
+                <div className='datasetsHeader'>
+                  <div className='searchData'>
+                    <div className='searchIconContainer'><img src={Search} id='searchIcon'></img></div>
+                    <input type='text' placeholder='Search Users by Name, Email or Date' id='searchInput' name='searchInput'></input> </div>
+                  <div className='datasetButtons'>
+                    <button className='openButton' onClick={handleClick}>Open</button>
+                    <div className='dataEditButton'>Edit</div>
+                    <div className='deleteButton'>Delete</div>
+                  </div>
                 </div>
+              </div>
+
+              <div className='rowTitles'>
+                <div className='idTitle'>ID</div>
+                <div className='fileNameTitle'>Files Name</div>
+                <div className='dateCreationTitle'>Date of creation</div>
+                <div className='modelTitle'>Model</div>
+              </div>
+
+              {response &&
+                response.financial_data &&
+                response.financial_data.map((item) => {
+                  return <TableRow key={item.cleaned_data_id} data={item} />;
+                })}
+
+
+
             </div>
 
+
+          </div>
+
+
+
         </div>
+      </div>
+
+    </div>
 
 
-    );
+  );
 };
 
 
