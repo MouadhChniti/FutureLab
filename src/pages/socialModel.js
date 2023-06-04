@@ -61,8 +61,13 @@ const SocialModel = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
+        const selectedValue = document.querySelector(
+            'input[name="fillMissValues"]:checked'
+          ).value;
+
         const formData = new FormData();
         formData.append('file', file);
+        formData.append("fillMissValues", selectedValue);
 
         try {
             const token = localStorage.getItem("token");
@@ -74,6 +79,8 @@ const SocialModel = () => {
         });
             setResponse(response.data);
             //console.log(response.data);
+            // Store the data_id in local storage
+            localStorage.setItem("data_id", response.data.data_id);
 
             navigate('/dashboardSocial', { state: response.data });
         } catch (error) {
@@ -238,6 +245,7 @@ const SocialModel = () => {
 
 
                                 <Radio
+                                // chwaya ta7ayol fl drop o avg
                                     checked={selectedValueb === 'avg'}
                                     onChange={handleChangeclean}
                                     value="avg"

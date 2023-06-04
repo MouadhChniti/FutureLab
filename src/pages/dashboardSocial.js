@@ -26,7 +26,7 @@ const DashboardSocial = (props) => {
     const location = useLocation();
     const data = location.state;
     console.log('data:', data)
-    const subjectsWithCommas = data.tomorrow_subjects.join(', ');
+    // const subjectsWithCommas = data.tomorrow_subjects.join(', ');
 
 
     const predictedData = data.predicted_values;
@@ -155,7 +155,7 @@ const DashboardSocial = (props) => {
 
 
                             </div>
-                            <div className='thirdDashboard'>
+                            {/* <div className='thirdDashboard'>
 
                                 <div className='tomorrowPredictBox'>
                                     <div className='tomorrowPredTitle'>Tomorrow's posts Subjects prediction</div>
@@ -168,29 +168,29 @@ const DashboardSocial = (props) => {
 
 
 
-                            </div>
+                            </div> */}
                             <div className='statsTableJust'>
                                 <div className='statsTable'>
                                     <div className='statsTitle'>Execution stats</div>
 
-                                    <div className='statDiv'> <div> Social Modlel Train Duration :</div> <div className='statsValues'> {data.Social_train_duration} s </div></div>
+                                    {/* <div className='statDiv'> <div> Social Modlel Train Duration :</div> <div className='statsValues'> {data.Social_train_duration} s </div></div> */}
 
 
 
 
-                                    <div className='statDiv'><div>Posts Model Train Duration :</div> <div className='statsValues'>{data.Posts_train_duration} s</div></div>
+                                    {/* <div className='statDiv'><div>Posts Model Train Duration :</div> <div className='statsValues'>{data.Posts_train_duration} s</div></div> */}
 
 
 
-                                    <div className='statDiv'><div>Subjects Model Train Duration : </div> <div className='statsValues'>{data.subjects_train_duration} s</div></div>
+                                    {/* <div className='statDiv'><div>Subjects Model Train Duration : </div> <div className='statsValues'>{data.subjects_train_duration} s</div></div> */}
 
 
 
-                                    <div className='statDiv'><div>Posts prediction Duration : </div> <div className='statsValues'>{data.prediction_duration_posts} s</div></div>
+                                    {/* <div className='statDiv'><div>Posts prediction Duration : </div> <div className='statsValues'>{data.prediction_duration_posts} s</div></div> */}
 
 
 
-                                    <div className='statDiv'><div>Subjects prediction Duration : </div><div className='statsValues'>{data.prediction_duration_subject} s</div></div>
+                                    {/* <div className='statDiv'><div>Subjects prediction Duration : </div><div className='statsValues'>{data.prediction_duration_subject} s</div></div> */}
 
 
 
