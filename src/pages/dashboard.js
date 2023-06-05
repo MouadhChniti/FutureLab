@@ -14,7 +14,7 @@ import { DataContext } from "../pages/financialModel";
 import { Line } from "react-chartjs-2";
 import Chart from "chart.js/auto";
 import LoadingScreen from "../components/loading";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 import "aos/dist/aos.css";
 
@@ -22,7 +22,7 @@ const Dashboard = (props) => {
   const [isLoading, setIsLoading] = useState(true);
   const location = useLocation();
   const data = location.state;
-  console.log("dataaa:", data);
+  // console.log("dataaa:", data);
 
   const predictedData = data.y_pred.map(([value]) => value);
   const actualData = data.y_test.map(([value]) => value);
@@ -112,17 +112,16 @@ const Dashboard = (props) => {
     };
   }, [data]);
 
-
   const navigate = useNavigate();
   const [response, setResponse] = useState(null);
   const [inputValues, setInputValues] = useState({
-    open: '',
-    high: '',
-    low: '',
-    close: '',
-    volume: '',
+    open: "",
+    high: "",
+    low: "",
+    close: "",
+    volume: "",
   });
-  
+
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setInputValues((prevValues) => ({
@@ -131,20 +130,19 @@ const Dashboard = (props) => {
     }));
   };
 
-
   const handleSubmit = async (event) => {
     event.preventDefault();
-  
+
     const token = localStorage.getItem("token");
-    
+
     const formData = new FormData();
-    formData.append('open', inputValues.open);
-    formData.append('high', inputValues.high);
-    formData.append('low', inputValues.low);
-    formData.append('close', inputValues.close);
-    formData.append('volume', inputValues.volume);
-    formData.append('data_id', data.data_id);
-  
+    formData.append("open", inputValues.open);
+    formData.append("high", inputValues.high);
+    formData.append("low", inputValues.low);
+    formData.append("close", inputValues.close);
+    formData.append("volume", inputValues.volume);
+    formData.append("data_id", data.data_id);
+
     try {
       const response = await axios.post(
         "http://localhost:8000/api/new_financial_model/",
@@ -152,27 +150,21 @@ const Dashboard = (props) => {
         {
           headers: {
             Authorization: `Bearer ${token}`,
-            'Content-Type': 'multipart/form-data', // Add this header for form data
+            "Content-Type": "multipart/form-data", // Add this header for form data
           },
         }
       );
       setResponse(response.data);
       //console.log(response.data);
-      
+
       // Store the data_id in local storage
       localStorage.setItem("data_id", response.data.data_id);
-      
+
       navigate("/dashboard", { state: response.data });
     } catch (error) {
       console.error("Error:", error);
     }
   };
-  
-  
-
-  
-
-
 
   return (
     <div className="homeJustifier">
@@ -213,10 +205,10 @@ const Dashboard = (props) => {
                   </div>
 
                   <div className="statDiv">
-                    <div>Prediction Duration :</div> <div> {data.prediction_time} s</div>
+                    <div>Prediction Duration :</div> <div>{data.prediction_time} s</div>
                   </div>
 
-                  <div className="statDiv">
+                  {/* <div className="statDiv">
                     <div>Finetune Duration : </div> m
                   </div>
 
@@ -230,73 +222,68 @@ const Dashboard = (props) => {
 
                   <div className="statDiv">
                     <div>Finetune Duration : </div> m
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
           </div>
 
-          
           <div className="predictNewDayJust">
             <div className="predictNewDay">New prediction</div>
           </div>
           <div className="predictTomorrowForm">
-          <div className="predictTomorrowFormJust">
-  <form onSubmit={handleSubmit}>
-    <div>
-      <input
-        type="text"
-        placeholder="Open"
-        name="open"
-        value={inputValues.open}
-        onChange={handleInputChange}
-      />
-    </div>
-    <div>
-      <input
-        type="text"
-        placeholder="High"
-        name="high"
-        value={inputValues.high}
-        onChange={handleInputChange}
-      />
-    </div>
-    <div>
-      <input
-        type="text"
-        placeholder="Low"
-        name="low"
-        value={inputValues.low}
-        onChange={handleInputChange}
-      />
-    </div>
-    <div>
-      <input
-        type="text"
-        placeholder="Close"
-        name="close"
-        value={inputValues.close}
-        onChange={handleInputChange}
-      />
-    </div>
-    <div>
-      <input
-        type="text"
-        placeholder="Volume"
-        name="volume"
-        value={inputValues.volume}
-        onChange={handleInputChange}
-      />
-    </div>
-    <button type="submit" className="predictButtonDash">Predict</button>
-  </form>
-</div>
-
-
-
-
-
-
+            <div className="predictTomorrowFormJust">
+              <form onSubmit={handleSubmit}>
+                <div>
+                  <input
+                    type="text"
+                    placeholder="Open"
+                    name="open"
+                    value={inputValues.open}
+                    onChange={handleInputChange}
+                  />
+                </div>
+                <div>
+                  <input
+                    type="text"
+                    placeholder="High"
+                    name="high"
+                    value={inputValues.high}
+                    onChange={handleInputChange}
+                  />
+                </div>
+                <div>
+                  <input
+                    type="text"
+                    placeholder="Low"
+                    name="low"
+                    value={inputValues.low}
+                    onChange={handleInputChange}
+                  />
+                </div>
+                <div>
+                  <input
+                    type="text"
+                    placeholder="Close"
+                    name="close"
+                    value={inputValues.close}
+                    onChange={handleInputChange}
+                  />
+                </div>
+                <div>
+                  <input
+                    type="text"
+                    placeholder="Volume"
+                    name="volume"
+                    value={inputValues.volume}
+                    onChange={handleInputChange}
+                  />
+                </div>
+                <button type="submit" className="predictButtonDash">
+                  Predict
+                </button>
+              </form>
+            </div>
 
             {/* <div className="predictTomorrowFormJust">
               <div>
