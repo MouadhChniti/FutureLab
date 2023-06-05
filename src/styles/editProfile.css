@@ -94,3 +94,8 @@ display: flex;
 a:-webkit-any-link {
  color: #7D4EF1;
 }
+.formEditProfile{
+    width: 100%;
+    height: 100%;
+    display: block;
+}

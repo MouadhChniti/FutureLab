@@ -178,7 +178,7 @@ const Editprofile = (props) => {
                 </div> */}
 
                 {/* </div> */}
-                <form onSubmit={handleEdit}>
+                <form className='formEditProfile' onSubmit={handleEdit}>
                   <div className='namesEdit'>
                     <div className='profileNameEdit'>
                       <div> First name</div>

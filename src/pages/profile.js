@@ -101,9 +101,9 @@ const Profile = (props) => {
                   Password
                   <div>...............</div>
                 </div>
-                <div className='editButton'>
+                <button className='editButton'>
                   <Link to='/editprofile'> Edit </Link>
-                </div>
+                </button>
               </div>
             </div>
           </>

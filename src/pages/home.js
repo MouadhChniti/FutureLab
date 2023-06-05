@@ -55,22 +55,21 @@ const Home = (props) => {
                                     <div className='imgContainer'>
                                         <img src={socialLogo} id="sociallogo" /></div>
                                     <div className='button'>
-                                        <div>Social recognition Model</div>
+                                        <div>Social media Model</div>
                                     </div>
                                 </Link>
 
                             </div>
 
-                            <div className='timeSeries'>
-                                {/* <div>social media emotion detection</div> */}
-                                <div className='imgContainer'>
-                                    <img src={timeSeriesLogo} id="timeSerieslogo" /></div>
+                            {/* <div className='timeSeries'>
+                                
+                                <div className='imgContainer'><img src={timeSeriesLogo} id="timeSerieslogo" /></div>
                                 <div className='button'>
                                     <div>Time Series Model</div>
                                 </div>
 
 
-                            </div>
+                            </div> */}
                         </div>
                     </div>
 
