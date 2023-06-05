@@ -15,6 +15,36 @@ const TableRow = (props) => {
       localStorage.setItem("model_name", model);
     }
   };
+useEffect(() => {
+    // Retrieve the previously stored IDs from local storage
+    const storedIds = localStorage.getItem('checkedIds');
+    if (storedIds) {
+      const parsedIds = JSON.parse(storedIds);
+      if (parsedIds.includes(cleaned_data_id)) {
+        setIsChecked(true);
+      }
+    }
+  }, [cleaned_data_id]);
+
+  const handleCheckboxsChange = (event) => {
+    setIsChecked(event.target.checked);
+
+    // Retrieve the previously stored IDs from local storage
+    const storedIds = localStorage.getItem('checkedIds');
+    let ids = [];
+    if (storedIds) {
+      ids = JSON.parse(storedIds);
+    }
+
+    if (event.target.checked) {
+      ids.push(cleaned_data_id);
+    } else {
+      ids = ids.filter((id) => id !== cleaned_data_id);
+    }
+
+    // Store the updated IDs in local storage
+    localStorage.setItem('checkedIds', JSON.stringify(ids));
+  };
 
 
     return (

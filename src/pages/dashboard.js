@@ -213,7 +213,7 @@ const Dashboard = (props) => {
                   </div>
 
                   <div className="statDiv">
-                    <div>Prediction Duration :</div> <div> s</div>
+                    <div>Prediction Duration :</div> <div> {data.prediction_time} s</div>
                   </div>
 
                   <div className="statDiv">

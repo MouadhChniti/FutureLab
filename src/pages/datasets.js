@@ -65,20 +65,20 @@ const Datasets = (props) => {
   const handleClick = () => {
     const cleaned_data_id = localStorage.getItem("data_id");
     const model_name = localStorage.getItem("model_name");
-  if (model_name=="financial model") {
-    axios.get('http://localhost:8000/api/get_financial_data_byid/', {
-      params: {
-        cleaned_data_id: cleaned_data_id,
-      },
-    })
-      .then(response => {
-        console.log(response.data);
-        
-        navigate("/dashboard", { state: response.data });
+    if (model_name == "financial model") {
+      axios.get('http://localhost:8000/api/get_financial_data_byid/', {
+        params: {
+          cleaned_data_id: cleaned_data_id,
+        },
       })
-      .catch(error => {
-        console.error('Error:', error);
-      });
+        .then(response => {
+          console.log(response.data);
+
+          navigate("/dashboard", { state: response.data });
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
     }
 
     if (model_name == "social model") {
@@ -98,66 +98,94 @@ const Datasets = (props) => {
   }
 
 
+  const handleDelete = () => {
+    // const checkedIds = localStorage.getItem("checkedIds");
+    const cleaned_data_id = localStorage.getItem("data_id");
+    const model_name = localStorage.getItem("model_name");
+
+    if (model_name == "financial model") {
+      axios.post('http://localhost:8000/api/delete_cleaned_data/', { cleaned_data_id: cleaned_data_id })
+        .then((response) => {
+          console.log(response.data.message); // Success message received from the Django view
+        })
+        .catch((error) => {
+          console.error('Error deleting cleaned data:', error);
+        });
+    }
+    if (model_name == "social model") {
+      axios.post('http://localhost:8000/api/social/delete_cleaned_data_social/', { cleaned_data_id: cleaned_data_id })
+        .then((response) => {
+          console.log(response.data.message); // Success message received from the Django view
+        })
+        .catch((error) => {
+          console.error('Error deleting cleaned data:', error);
+        });
+    }
+  
+};
 
 
 
 
 
-  return (
-    <div className='homeJustifier'>
-      <Menu />
-      <div className='allHomeJust'>
-        <div className='allHomee'>
-          <Navbar />
-          <div className='datasetsTitleJust'>
-            <div className='datasetsTitle'>
-              Files
-            </div>
+
+
+
+return (
+  <div className='homeJustifier'>
+    <Menu />
+    <div className='allHomeJust'>
+      <div className='allHomee'>
+        <Navbar />
+        <div className='datasetsTitleJust'>
+          <div className='datasetsTitle'>
+            Files
           </div>
-          <div className='datasetsContainer'>
-            <div className='datasetsTable'>
-              <div className='datasetsHeaderJust'>
-                <div className='datasetsHeader'>
-                  <div className='searchData'>
-                    <div className='searchIconContainer'><img src={Search} id='searchIcon'></img></div>
-                    <input type='text' placeholder='Search Users by Name, Email or Date' id='searchInput' name='searchInput'></input> </div>
-                  <div className='datasetButtons'>
-                    <button className='openButton' onClick={handleClick}>Open</button>
-                    <div className='dataEditButton'>Edit</div>
-                    <div className='deleteButton'>Delete</div>
-                  </div>
+        </div>
+        <div className='datasetsContainer'>
+          <div className='datasetsTable'>
+            <div className='datasetsHeaderJust'>
+              <div className='datasetsHeader'>
+                <div className='searchData'>
+                  <div className='searchIconContainer'><img src={Search} id='searchIcon'></img></div>
+                  <input type='text' placeholder='Search Users by Name, Email or Date' id='searchInput' name='searchInput'></input> </div>
+                <div className='datasetButtons'>
+                  <button className='openButton' onClick={handleClick}>Open</button>
+                  <div className='dataEditButton'>Edit</div>
+                  <div className='deleteButton' onClick={handleDelete}>Delete</div>
                 </div>
               </div>
-
-              <div className='rowTitles'>
-                <div className='idTitle'>ID</div>
-                <div className='fileNameTitle'>Files Name</div>
-                <div className='dateCreationTitle'>Date of creation</div>
-                <div className='modelTitle'>Model</div>
-              </div>
-
-              {response &&
-                response.financial_data &&
-                response.financial_data.map((item) => {
-                  return <TableRow key={item.cleaned_data_id} data={item} />;
-                })}
-
-
-
             </div>
+
+            <div className='rowTitles'>
+              <div className='idTitle'>ID</div>
+              <div className='fileNameTitle'>Files Name</div>
+              <div className='dateCreationTitle'>Date of creation</div>
+              <div className='modelTitle'>Model</div>
+            </div>
+
+            {response &&
+              response.financial_data &&
+              response.financial_data.map((item) => {
+                return <TableRow key={item.cleaned_data_id} data={item} />;
+              })}
+
 
 
           </div>
-
 
 
         </div>
-      </div>
 
+
+
+      </div>
     </div>
 
+  </div>
 
-  );
+
+);
 };
 
 
