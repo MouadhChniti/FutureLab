@@ -71,11 +71,12 @@ const Profile = (props) => {
     <div className='fmJustifier'>
       <Menu />
       <div className='bigTitleFm'>
-        {isLoading ? (
+        
+            <Navbar />
+            {isLoading ? (
           <LoadingScreen />
         ) : (
           <>
-            <Navbar />
             <div className='profileJust'>
               <div className='profileForm'>
                 <div>

@@ -15,6 +15,7 @@ import axios from 'axios';
 import SocialModel from './pages/socialModel';
 import DashboardSocial from './pages/dashboardSocial';
 import Admin from './pages/admin';
+import Resetpass from './pages/resetPass';
 //import socketIoClient from './socketIoClient';
 
 
@@ -38,6 +39,7 @@ const App = () => {
         <Route path="/login/" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/forgetPassword" element={<Forgetpass />} />
+        <Route path="/resetpassword" element={<Resetpass />} />
         <Route path="/Profile" element={<Profile />} />
         <Route path="/editprofile" element={<Editprofile />} />
         <Route path="/dashboard" element={<Dashboard />} />

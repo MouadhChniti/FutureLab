@@ -1,9 +1,22 @@
 .loading-screen {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    width: 1600px;
-    
-  }
-  
+  position: fixed;
+  top: 4;
+  left: 0;
+  width: 100%;
+  height: 93vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient( #ECEBFC, #9468edb6); /* Optional: Add a semi-transparent background */
+}
+
+.loading-spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 100px;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}

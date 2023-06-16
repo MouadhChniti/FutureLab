@@ -102,82 +102,19 @@ const Editprofile = (props) => {
     <div className='fmJustifier'>
       <Menu />
       <div className='bigTitleFm'>
-        {isLoading ? (
+        
+            <Navbar />
+            {isLoading ? (
           <LoadingScreen />
         ) : (
           <>
-            <Navbar />
             <div className='profileJust'>
               <div className='profileForm'>
               <div >
                   <div className='profileTitleEdit'>Edit Profile</div>
 
                 </div>
-                {/* <div className='profileJust'>
-              <div className='profileForm'>
-                <div >
-                  <div className='profileTitleEdit'>Edit Profile</div>
-
-                </div>
-                <div className='namesEdit'>
-                  <div className='profileNameEdit'>
-                    <div> First name</div>
-
-                  </div>
-                  <div className='profileLastEdit'>
-                    <div>Last name</div>
-                  </div>
-
-
-                </div>
-                <div className='namesContentEdit'>
-
-                  <div className='namesInputEdit'><input type='text' id='nameEdit'></input></div>
-                  <div className='namesInputEdit'><input type='text' id='lastEdit'></input></div>
-                </div>
-                <div className='emailEdit'>E-mail
-                  <div><div className='emailInputEdit'><input type='text' id='emailEdit'></input></div>
-                  </div>
-                </div>
-
-                <div className='emailContent'></div>
-
-                <div className='passwordProfile'>Current password
-                  <div>
-                    <div><input type='text' id='currentPassword'></input></div>
-                  </div>
-                </div>
-
-                <div className='passwordProfile'>New password
-                  <div>
-                    <div><input type='text' id='newPassword'></input></div>
-                  </div>
-                </div>
-
-                <div className='passwordProfile'>Confirm password
-                  <div>
-                    <div><input type='text' id='rePassword'></input></div>
-                  </div>
-                </div>
-                <div className='editprofileButtons'>
-
-                  <Link to='/profile' className='cancelEdit'>
-                    <div className='cancelEditBtn'>
-                      Cancel
-                    </div>
-                  </Link>
-
-
-
-                  <Link to='/profile' className='saveButtonEdit'>
-                    <div className='saveButtonEditBtn'>
-                      Save
-                    </div>
-                  </Link>
-
-                </div> */}
-
-                {/* </div> */}
+      
                 <form className='formEditProfile' onSubmit={handleEdit}>
                   <div className='namesEdit'>
                     <div className='profileNameEdit'>

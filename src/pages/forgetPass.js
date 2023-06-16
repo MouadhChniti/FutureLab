@@ -14,10 +14,28 @@ import "aos/dist/aos.css";
 
 
 const Forgetpass = (props) => {
+    const [email, setEmail] = useState('');
 
-
-
-
+    const handleEmailChange = (event) => {
+      setEmail(event.target.value);
+    };
+  
+    const handleButtonClick = () => {
+        console.log(email);
+      
+        // Replace with your server endpoint that sends the email
+        axios
+          .post('http://localhost:8000/api/accounts/send_email/', { email: email })
+          .then(response => {
+            console.log('Email sent successfully');
+            alert(response.data.message);
+            // handle success if needed
+          })
+          .catch(error => {
+            console.error('Error sending email:', error);
+            // handle error if needed
+          });
+      };
 
     return (
         <div className='allHome'>
@@ -38,13 +56,13 @@ const Forgetpass = (props) => {
                                 <div>Please enter your email address below</div>
                             </div>
                             <div className='inputForge'>
-                                <div className='inpJust'><input type='text' placeholder='Enter your E-mail'></input></div>
+                                <div className='inpJust'><input className='sendmailInput' type="email" value={email} onChange={handleEmailChange} placeholder='Enter your E-mail'></input></div>
                             </div>
 
 
                             <div className='forgetButtons'>
                                <div className='cancelButtonF'> <Link to='/login'>Cancel</Link></div>
-                                <div className='SendButtonF'>Send</div>
+                                <button className='SendButtonF' onClick={handleButtonClick}>Send</button>
 
                             </div>
                         </div>

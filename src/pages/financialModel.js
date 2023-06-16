@@ -28,6 +28,7 @@ import Navbar from "../components/navbar";
 import Menu from "../components/menu";
 import Dashboard from "./dashboard";
 import { Navigate } from "react-router-dom/dist";
+import LoadingScreen from "../components/loading";
 
 const fakeResponse = {
   data: [
@@ -43,7 +44,7 @@ const Fm = () => {
   const navigate = useNavigate();
 
   const [data, setData] = useState([]);
-
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [file, setFile] = useState(null);
   const [response, setResponse] = useState(null);
@@ -54,7 +55,7 @@ const Fm = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    setIsLoading(true);
     const selectedValue = document.querySelector(
       'input[name="fillMissValues"]:checked'
     ).value;
@@ -84,8 +85,9 @@ const Fm = () => {
     } catch (error) {
       console.error("Error:", error);
     }
+    setIsLoading(false);
   };
-  
+
   function CheckBox({ label, isChecked, onChange }) {
     return (
       <label>
@@ -173,26 +175,6 @@ const Fm = () => {
     });
   }
 
-  const handleFormSubmit = (event) => {
-    event.preventDefault();
-    console.log(params);
-
-    const fakeResponse = {
-      data: [
-        {
-          id: 1,
-          name: "Item 1",
-          date: "11/01/2023",
-          tomorrowPredict: "230.25567",
-          predictDuration: "1.23",
-          trainDuration: "12.25567",
-          fineTuneDuration: "22.25567",
-        },
-      ],
-    };
-
-    navigate("/dashboard", { state: { data: fakeResponse.data } });
-  };
   const handleChangeopt = (event) => {
     const { optimizer, value } = event.target;
     setParams((prevState) => ({
@@ -200,10 +182,8 @@ const Fm = () => {
       optimizer: value,
     }));
   };
-  // const handleFileChange = (event) => {
-  //     const file = event.target.files[0];
-  //     setParams({ ...params, file });
-  //   };
+
+
 
   return (
     <div className="fmJustifier">
@@ -211,6 +191,10 @@ const Fm = () => {
 
       <div className="bigTitleFm">
         <Navbar />
+        {isLoading ? (
+          <LoadingScreen />
+        ) : (
+          <>
         <div className="titleback">
           <div>
             <Link to="/home">
@@ -223,6 +207,7 @@ const Fm = () => {
           <div className="leftFmForm">
             <img src={formFmImg} id="formFmImg"></img>
           </div>
+
           <form className="formFm" onSubmit={handleSubmit}>
             <div className="financialjust">
               <div className="titleFm">Financial Model training</div>
@@ -239,28 +224,6 @@ const Fm = () => {
                 />
               </div>
 
-              {/* <div className='paramsFm'>
-                                <div>Parameters choice:</div>
-
-                                <Radio
-                                    checked={selectedValue === 'choose'}
-                                    onChange={handleChange}
-                                    value="choose"
-                                    name="paramsChoice"
-                                    inputProps={{ 'aria-label': 'A' }}
-                                />
-                                <label>Select</label>
-
-
-                                <Radio
-                                    checked={selectedValue === 'default'}
-                                    onChange={handleChange}
-                                    value="default"
-                                    name="paramsChoice"
-                                    inputProps={{ 'aria-label': 'B' }}
-                                />
-                                <label>Default</label>
-                            </div> */}
 
               <div className="missingFm">
                 <div>Missing Data:</div>
@@ -286,52 +249,17 @@ const Fm = () => {
                 <label>Average</label>
               </div>
 
-              {/* <div className='inputsFm'><input type='text' placeholder='epochs' name='epochs' id='fmInput'
-                                value={params.epochs}
-                                disabled={selectedValue == 'default'} onChange={(e) => setParams({ ...params, epochs: e.target.value })}></input></div>
-
-                            <div className='inputsFm'><input type='text' placeholder='units' name='units' id='fmInput'
-                                value={params.units}
-                                disabled={selectedValue == 'default'} onChange={(e) => setParams({ ...params, units: e.target.value })}></input></div>
-                            <div className='inputsFm'><input type='text' placeholder='batch size' name='batchSize' id='fmInput'
-                                value={params.batchSize}
-                                disabled={selectedValue == 'default'} onChange={(e) => setParams({ ...params, batchSize: e.target.value })}></input></div>
- */}
-
-              {/* <Box sx={{ minWidth: 120 }}>
-                            <FormControl fullWidth>
-                                <InputLabel id="demo-simple-select-label">optimizer</InputLabel>
-                                <Select
-                                    labelId="demo-simple-select-label"
-                                    id="demo-simple-select"
-                                    value={params.optimizer}
-                                    label="optimizer"
-                                    onChange={handleChangeopt}
-                                    disabled={selectedValue == 'default'}
-                                >
-                                    <MenuItem value={'adam'}>adam</MenuItem>
-                                    <MenuItem value={'sgd'}>sgd</MenuItem>
-                                </Select>
-                            </FormControl>
-                        </Box> */}
-
-              {/* <div className='boxcss'>
-
-                                <CheckBox
-                                    label="Finetune your model (better results - longer process)"
-                                    isChecked={isChecked}
-                                    onChange={handleCheckChange}
-                                />
-                            </div> */}
 
               <div className="trainhome">
                 <button onSubmit={handleSubmit}>Train your Model</button>
               </div>
             </div>
           </form>
+
         </div>
+        </>)}
       </div>
-      <div></div>
+      
     </div>
   );
 };

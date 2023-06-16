@@ -22,6 +22,17 @@
 }
 .inputForge{
     width: 418px;
+    height: 55px;
+    display: flex;
+    align-items: center;
+}
+.sendmailInput{
+    width: 100%;
+    height: 45px;
+    border-radius: 8px;
+    background-color: #F0EFFF;
+    
+
 }
 .forgetButtons{
     display: flex;

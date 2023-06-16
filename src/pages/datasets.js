@@ -15,7 +15,7 @@ import { DataContext } from '../pages/financialModel';
 import Search from '../images/Search.png'
 import TableRow from '../components/rowTable';
 import { useNavigate } from "react-router-dom/dist";
-
+import LoadingScreen from '../components/loading';
 
 import "aos/dist/aos.css";
 
@@ -124,6 +124,15 @@ const Datasets = (props) => {
   
 };
 
+const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate an asynchronous operation
+    setTimeout(() => {
+      setIsLoading(false); // Set isLoading to false after the data is loaded
+    }, 3000);
+  }, []);
+
 
 
 
@@ -137,6 +146,10 @@ return (
     <div className='allHomeJust'>
       <div className='allHomee'>
         <Navbar />
+        {isLoading ? (
+          <LoadingScreen />
+        ) : (
+          <>
         <div className='datasetsTitleJust'>
           <div className='datasetsTitle'>
             Files
@@ -178,7 +191,7 @@ return (
         </div>
 
 
-
+        </> )}
       </div>
     </div>
 

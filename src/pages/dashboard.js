@@ -15,7 +15,6 @@ import { Line } from "react-chartjs-2";
 import Chart from "chart.js/auto";
 import LoadingScreen from "../components/loading";
 import { useNavigate } from "react-router-dom";
-
 import "aos/dist/aos.css";
 
 const Dashboard = (props) => {
@@ -131,8 +130,8 @@ const Dashboard = (props) => {
   };
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
-
+    event.preventDefault()
+    setIsLoading(true);
     const token = localStorage.getItem("token");
 
     const formData = new FormData();
@@ -164,6 +163,7 @@ const Dashboard = (props) => {
     } catch (error) {
       console.error("Error:", error);
     }
+    setIsLoading(false);
   };
 
   return (
@@ -172,6 +172,7 @@ const Dashboard = (props) => {
       <div className="allHomeJust">
         <div className="allHomee">
           <Navbar />
+          
           <div className="dashboardTitleJust">
             <div className="dashboardTitle">Financial Model Dashboard</div>
           </div>
@@ -309,6 +310,7 @@ const Dashboard = (props) => {
               <button className="predictButtonDash">Predict</button>
             </div> */}
           </div>
+
         </div>
       </div>
     </div>

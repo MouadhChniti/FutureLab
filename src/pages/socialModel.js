@@ -34,6 +34,7 @@ import Menu from '../components/menu'
 import Dashboard from './dashboard';
 import { Navigate } from 'react-router-dom/dist';
 import socialimg from '../images/socialimg.png'
+import LoadingScreen from "../components/loading";
 
 
 
@@ -49,7 +50,7 @@ const SocialModel = () => {
 
 
     const [data, setData] = useState([]);
-
+    const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
     const [file, setFile] = useState(null);
     const [response, setResponse] = useState(null);
@@ -60,10 +61,11 @@ const SocialModel = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        setIsLoading(true);
 
         const selectedValue = document.querySelector(
             'input[name="fillMissValues"]:checked'
-          ).value;
+        ).value;
 
         const formData = new FormData();
         formData.append('file', file);
@@ -72,11 +74,11 @@ const SocialModel = () => {
         try {
             const token = localStorage.getItem("token");
             const response = await axios.post('http://localhost:8000/api/social/social_model/', formData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
             setResponse(response.data);
             //console.log(response.data);
             // Store the data_id in local storage
@@ -86,6 +88,7 @@ const SocialModel = () => {
         } catch (error) {
             console.error('Error:', error);
         }
+        setIsLoading(false);
     };
 
     {/*const sendData = async (event) => {
@@ -196,89 +199,94 @@ const SocialModel = () => {
             <div className='bigTitleFm'>
 
                 <Navbar />
-                <div className='titleback'>
-                    <div>
-                        <Link to='/home'><img src={backIcon} id='backIcon'></img></Link>
-                    </div>
-                    <div>
-                        Social Media Model Training
-                    </div>
-                </div>
-                <div className='allFinancial'>
-                    <div className='leftFmForm'>
-
-                        <img src={socialimg} id='socialimg'></img>
-
-                    </div>
-                    <form className='formFm' onSubmit={handleSubmit} >
-                        <div className='financialjust'>
-                            <div className='titleFm'>Financial Model training</div>
-                            <div className='datasetFm'>
-                                <div>Upload your dataset:   </div>
-                                <label htmlFor="fileUpload">
-                                    <img src={uploadImg} id="uploadImg" />
-                                </label>
-                                <input
-                                    id="fileUpload"
-                                    type="file"
-                                    style={{ display: "none" }}
-                                    onChange={handleFileChange}
-                                />
+                {isLoading ? (
+                    <LoadingScreen />
+                ) : (
+                    <>
+                        <div className='titleback'>
+                            <div>
+                                <Link to='/home'><img src={backIcon} id='backIcon'></img></Link>
                             </div>
-
-
-
-                            <div className='missingFm'>
-                                <div>
-                                    Missing Data:
-                                </div>
-
-                                <Radio
-                                    checked={selectedValueb === 'drop'}
-                                    onChange={handleChangeclean}
-                                    value="drop"
-                                    name="fillMissValues"
-                                    inputProps={{ 'aria-label': 'C' }}
-                                //disabled={selectedValue == 'default'}
-                                />
-                                <label>Delete</label>
-
-
-                                <Radio
-                                // chwaya ta7ayol fl drop o avg
-                                    checked={selectedValueb === 'avg'}
-                                    onChange={handleChangeclean}
-                                    value="avg"
-                                    name="fillMissValues"
-                                    inputProps={{ 'aria-label': 'D' }}
-                                //disabled={selectedValue == 'default'}
-
-                                />
-                                <label>Average</label>
-                            </div>
-
-
-
-
-
-
-
-
-
-                            <div className='trainhome'>
-
-                                <button onSubmit={handleSubmit} >Train your Model</button>
-
+                            <div>
+                                Social Media Model Training
                             </div>
                         </div>
+                        <div className='allFinancial'>
+                            <div className='leftFmForm'>
+
+                                <img src={socialimg} id='socialimg'></img>
+
+                            </div>
+                            <form className='formFm' onSubmit={handleSubmit} >
+                                <div className='financialjust'>
+                                    <div className='titleFm'>Financial Model training</div>
+                                    <div className='datasetFm'>
+                                        <div>Upload your dataset:   </div>
+                                        <label htmlFor="fileUpload">
+                                            <img src={uploadImg} id="uploadImg" />
+                                        </label>
+                                        <input
+                                            id="fileUpload"
+                                            type="file"
+                                            style={{ display: "none" }}
+                                            onChange={handleFileChange}
+                                        />
+                                    </div>
+
+
+
+                                    <div className='missingFm'>
+                                        <div>
+                                            Missing Data:
+                                        </div>
+
+                                        <Radio
+                                            checked={selectedValueb === 'drop'}
+                                            onChange={handleChangeclean}
+                                            value="drop"
+                                            name="fillMissValues"
+                                            inputProps={{ 'aria-label': 'C' }}
+                                        //disabled={selectedValue == 'default'}
+                                        />
+                                        <label>Delete</label>
+
+
+                                        <Radio
+                                            // chwaya ta7ayol fl drop o avg
+                                            checked={selectedValueb === 'avg'}
+                                            onChange={handleChangeclean}
+                                            value="avg"
+                                            name="fillMissValues"
+                                            inputProps={{ 'aria-label': 'D' }}
+                                        //disabled={selectedValue == 'default'}
+
+                                        />
+                                        <label>Average</label>
+                                    </div>
 
 
 
 
-                    </form>
-                </div>
 
+
+
+
+
+                                    <div className='trainhome'>
+
+                                        <button onSubmit={handleSubmit} >Train your Model</button>
+
+                                    </div>
+                                </div>
+
+
+
+
+                            </form>
+                        </div>
+                    </>)}
             </div>
+
             <div>
 
 

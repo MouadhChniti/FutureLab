@@ -24,7 +24,7 @@ const Signup = (props) => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState(null);
 
-    const handleSignup = async () => {
+    const handleSignup = async (event) => {
         // Create an object with the form data
         const formData = {
             email,
@@ -33,12 +33,11 @@ const Signup = (props) => {
             password,
             confirmPassword,
         };
-        //console.log(formData);
         try {
-            console.log('api process started')
-
+            
             const response = await axios.post('http://localhost:8000/api/accounts/signup/', formData);
             console.log(response.data);
+            alert(response.data.message);
 
             //Navigate('/login');
 

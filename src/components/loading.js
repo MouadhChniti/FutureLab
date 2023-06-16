@@ -1,11 +1,11 @@
 import React from 'react';
-
-import { BeatLoader } from 'react-spinners';
+import '../styles/loadingScreen.css';
+import { BeatLoader,ClockLoader,HashLoader } from 'react-spinners';
 
 const LoadingScreen = () => {
   return (
     <div className="loading-screen">
-      <BeatLoader color="#000" loading={true} size={20} />
+      <HashLoader color="#7D4EF1" loading={true} size={50} />
     </div>
   );
 };
