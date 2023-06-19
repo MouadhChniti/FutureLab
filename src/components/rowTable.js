@@ -3,9 +3,14 @@ import '../styles/rowTable.css'
 import { useState, useEffect, useRef } from 'react';
 
 const TableRow = (props) => {
-    const { cleaned_data_id, created_at, model } = props.data;
+  const { cleaned_data_id, created_at, model, dataset_name } = props.data;
 
-    const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
+  const [datasetName, setDatasetName] = useState('');
+
+  const handleInputChange = (event) => {
+    setDatasetName(event.target.value);
+  };
 
   const handleCheckboxChange = (event) => {
     setIsChecked(event.target.checked);
@@ -13,9 +18,10 @@ const TableRow = (props) => {
       console.log(cleaned_data_id);
       localStorage.setItem("data_id", cleaned_data_id);
       localStorage.setItem("model_name", model);
+      localStorage.setItem("dataset_name",datasetName);
     }
   };
-useEffect(() => {
+  useEffect(() => {
     // Retrieve the previously stored IDs from local storage
     const storedIds = localStorage.getItem('checkedIds');
     if (storedIds) {
@@ -47,33 +53,35 @@ useEffect(() => {
   };
 
 
-    return (
-        <div>
-            <div className='allRow'>
-                <div className='idContainer'>
-                    <input type='checkbox' checked={isChecked} onChange={handleCheckboxChange}></input>
-                    {cleaned_data_id}
-                </div>
-                <div className='fileNameContainer'>
-                    name
-                </div>
-                <div className='dateCreationContainer'>
-                    {created_at}
-                </div>
-                <div className='modelContainer'>
-                    {model}
-                </div>
-
-            </div>
-
-
-
-
-
-
+  return (
+    <div>
+      <div className='allRow'>
+        <div className='idContainer'>
+          <input type='checkbox' checked={isChecked} onChange={handleCheckboxChange}></input>
+          {cleaned_data_id}
+        </div>
+        <div className='fileNameContainer'>
+          <input type='text' placeholder={dataset_name} id='datasetNameFiles' value={datasetName}
+            onChange={handleInputChange}></input>
 
         </div>
-    );
+        <div className='dateCreationContainer'>
+          {created_at}
+        </div>
+        <div className='modelContainer'>
+          {model}
+        </div>
+
+      </div>
+
+
+
+
+
+
+
+    </div>
+  );
 }
 
 export default TableRow;

@@ -43,7 +43,7 @@ const Editprofile = (props) => {
         if (response.data) {
           console.log(response.data);
           setuserdata(response.data);
-          console.log(response.data);
+          console.log(userdata)
         } else {
           throw new Error('Failed to retrieve username');
         }
@@ -83,6 +83,7 @@ const Editprofile = (props) => {
       last_name: id === 'lastEdit' ? value : prevData.last_name,
     }));
   };
+  
   const navigate = useNavigate()
   const handleEdit = async (event) => {
     event.preventDefault();
@@ -126,10 +127,10 @@ const Editprofile = (props) => {
                   </div>
                   <div className='namesContentEdit'>
                     <div className='namesInputEdit'>
-                      <input type='text' id='nameEdit' value={userdata.firstname} />
+                      <input type='text' placeholder={userdata.firstname} id='nameEdit' value={formData.first_name} onChange={handleInputChange} />
                     </div>
                     <div className='namesInputEdit'>
-                      <input type='text' id='lastEdit' value={userdata.lastname} />
+                      <input type='text' id='lastEdit' placeholder={userdata.lastname} value={formData.last_name} onChange={handleInputChange} />
                     </div>
                   </div>
                   <div className='emailEdit'>

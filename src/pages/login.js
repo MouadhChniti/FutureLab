@@ -14,11 +14,12 @@ import facebook from '../images/Facebook.png'
 import Signup from '../pages/signup'
 import "aos/dist/aos.css";
 import { useNavigate } from 'react-router-dom';
+import LoadingScreen from "../components/loading";
 
 
 const Login = (props) => {
     const navigate = useNavigate()
-
+    const [isLoading, setIsLoading] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
@@ -49,6 +50,10 @@ const Login = (props) => {
 
     return (
         <div className='allHome'>
+            {isLoading ? (
+                    <LoadingScreen />
+                ) : (
+                    <>
             <div className='home'>
                 <div className='leftJustifier'>
                     <div className='left'>
@@ -108,7 +113,7 @@ const Login = (props) => {
 
             </div>
 
-
+            </>)}
         </div>
     );
 };

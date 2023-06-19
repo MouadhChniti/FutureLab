@@ -48,6 +48,12 @@ const Fm = () => {
   const [error, setError] = useState(null);
   const [file, setFile] = useState(null);
   const [response, setResponse] = useState(null);
+  const [datasetName, setDatasetName] = useState("");
+
+  const handleInputChange = (event) => {
+    setDatasetName(event.target.value);
+  };
+
 
   const handleFileChange = (event) => {
     setFile(event.target.files[0]);
@@ -63,7 +69,9 @@ const Fm = () => {
     const formData = new FormData();
     formData.append("file", file);
     formData.append("fillMissValues", selectedValue);
+    formData.append("datasetName", datasetName);
 
+    console.log(formData.selectedValue)
     try {
       const token = localStorage.getItem("token");
 
@@ -195,71 +203,75 @@ const Fm = () => {
           <LoadingScreen />
         ) : (
           <>
-        <div className="titleback">
-          <div>
-            <Link to="/home">
-              <img src={backIcon} id="backIcon"></img>
-            </Link>
-          </div>
-          <div>Financial Model Training</div>
-        </div>
-        <div className="allFinancial">
-          <div className="leftFmForm">
-            <img src={formFmImg} id="formFmImg"></img>
-          </div>
-
-          <form className="formFm" onSubmit={handleSubmit}>
-            <div className="financialjust">
-              <div className="titleFm">Financial Model training</div>
-              <div className="datasetFm">
-                <div>Upload your dataset: </div>
-                <label htmlFor="fileUpload">
-                  <img src={uploadImg} id="uploadImg" />
-                </label>
-                <input
-                  id="fileUpload"
-                  type="file"
-                  style={{ display: "none" }}
-                  onChange={handleFileChange}
-                />
+            <div className="titleback">
+              <div>
+                <Link to="/home">
+                  <img src={backIcon} id="backIcon"></img>
+                </Link>
               </div>
-
-
-              <div className="missingFm">
-                <div>Missing Data:</div>
-
-                <Radio
-                  checked={selectedValueb === "drop"}
-                  onChange={handleChangeclean}
-                  value="drop"
-                  name="fillMissValues"
-                  inputProps={{ "aria-label": "C" }}
-                  //disabled={selectedValue == 'default'}
-                />
-                <label>Delete</label>
-
-                <Radio
-                  checked={selectedValueb === "avg"}
-                  onChange={handleChangeclean}
-                  value="avg"
-                  name="fillMissValues"
-                  inputProps={{ "aria-label": "D" }}
-                  //disabled={selectedValue == 'default'}
-                />
-                <label>Average</label>
-              </div>
-
-
-              <div className="trainhome">
-                <button onSubmit={handleSubmit}>Train your Model</button>
-              </div>
+              <div>Financial Model Training</div>
             </div>
-          </form>
+            <div className="allFinancial">
+              <div className="leftFmForm">
+                <img src={formFmImg} id="formFmImg"></img>
+              </div>
 
-        </div>
-        </>)}
+              <form className="formFm" onSubmit={handleSubmit}>
+                <div className="financialjust">
+                  <div className="titleFm">Financial Model training</div>
+                  <div className="datasetFm">
+                    <div>Upload your dataset: </div>
+                    <label htmlFor="fileUpload">
+                      <img src={uploadImg} id="uploadImg" />
+                    </label>
+                    <input
+                      id="fileUpload"
+                      type="file"
+                      style={{ display: "none" }}
+                      onChange={handleFileChange}
+                    />
+                  </div>
+
+
+                  <div className="missingFm">
+                    <div>Missing Data:</div>
+
+                    <Radio
+                      checked={selectedValueb === "drop"}
+                      onChange={handleChangeclean}
+                      value="drop"
+                      name="fillMissValues"
+                      inputProps={{ "aria-label": "C" }}
+                    //disabled={selectedValue == 'default'}
+                    />
+                    <label>Delete</label>
+
+                    <Radio
+                      checked={selectedValueb === "avg"}
+                      onChange={handleChangeclean}
+                      value="avg"
+                      name="fillMissValues"
+                      inputProps={{ "aria-label": "D" }}
+                    //disabled={selectedValue == 'default'}
+                    />
+                    <label>Average</label>
+
+                  </div>
+                  <div className="datasetNameDiv"><input type="text" placeholder="Dataset name"  id="datasetName"
+                  value={datasetName}
+                  onChange={handleInputChange}></input> </div>
+
+
+                  <div className="trainhome">
+                    <button onSubmit={handleSubmit}>Train your Model</button>
+                  </div>
+                </div>
+              </form>
+
+            </div>
+          </>)}
       </div>
-      
+
     </div>
   );
 };

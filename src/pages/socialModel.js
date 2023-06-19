@@ -54,6 +54,11 @@ const SocialModel = () => {
     const [error, setError] = useState(null);
     const [file, setFile] = useState(null);
     const [response, setResponse] = useState(null);
+    const [datasetName, setDatasetName] = useState("");
+  
+    const handleInputChange = (event) => {
+      setDatasetName(event.target.value);
+    };
 
     const handleFileChange = (event) => {
         setFile(event.target.files[0]);
@@ -70,7 +75,8 @@ const SocialModel = () => {
         const formData = new FormData();
         formData.append('file', file);
         formData.append("fillMissValues", selectedValue);
-
+        formData.append("datasetName", datasetName);
+        
         try {
             const token = localStorage.getItem("token");
             const response = await axios.post('http://localhost:8000/api/social/social_model/', formData,
@@ -262,9 +268,12 @@ const SocialModel = () => {
 
                                         />
                                         <label>Average</label>
+
                                     </div>
 
-
+                                    <div className='datasetNameDiv'><input type="text" placeholder="Dataset name" id='datasetName'
+                                    value={datasetName}
+                                    onChange={handleInputChange}></input> </div>
 
 
 

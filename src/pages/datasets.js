@@ -107,7 +107,9 @@ const Datasets = (props) => {
       axios.post('http://localhost:8000/api/delete_cleaned_data/', { cleaned_data_id: cleaned_data_id })
         .then((response) => {
           console.log(response.data.message); // Success message received from the Django view
+          window.location.reload();
         })
+        
         .catch((error) => {
           console.error('Error deleting cleaned data:', error);
         });
@@ -116,13 +118,30 @@ const Datasets = (props) => {
       axios.post('http://localhost:8000/api/social/delete_cleaned_data_social/', { cleaned_data_id: cleaned_data_id })
         .then((response) => {
           console.log(response.data.message); // Success message received from the Django view
+          window.location.reload();
         })
         .catch((error) => {
           console.error('Error deleting cleaned data:', error);
         });
     }
-  
 };
+
+const handleEdit = () => {
+  // const checkedIds = localStorage.getItem("checkedIds");
+  const cleaned_data_id = localStorage.getItem("data_id");
+  const dataset_name = localStorage.getItem("dataset_name");
+
+    axios.post('http://localhost:8000/api/edit_cleaned_data/', { cleaned_data_id: cleaned_data_id , dataset_name: dataset_name})
+      .then((response) => {
+        console.log(response.data.message); // Success message received from the Django view
+        window.location.reload();
+      })
+      
+      .catch((error) => {
+        console.error('Error deleting cleaned data:', error);
+      });
+  }
+
 
 const [isLoading, setIsLoading] = useState(true);
 
@@ -161,11 +180,11 @@ return (
               <div className='datasetsHeader'>
                 <div className='searchData'>
                   <div className='searchIconContainer'><img src={Search} id='searchIcon'></img></div>
-                  <input type='text' placeholder='Search Users by Name, Email or Date' id='searchInput' name='searchInput'></input> </div>
+                  <input type='text' placeholder='Search ...' id='searchInput' name='searchInput'></input> </div>
                 <div className='datasetButtons'>
-                  <button className='openButton' onClick={handleClick}>Open</button>
-                  <div className='dataEditButton'>Edit</div>
-                  <div className='deleteButton' onClick={handleDelete}>Delete</div>
+                  <button className='openButton' onClick={handleClick} id='datasetsButton'>Open</button>
+                  <button className='dataEditButton' onClick={handleEdit} id='datasetsButton'>Edit</button>
+                  <button className='deleteButton' onClick={handleDelete} id='datasetsButton'>Delete</button>
                 </div>
               </div>
             </div>
